@@ -42,7 +42,7 @@ export default function LoginScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.root}
     >
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {/* Logo mark */}
         <View style={styles.logoArea}>
@@ -107,7 +107,7 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   scroll: { flexGrow: 1, paddingHorizontal: 24, paddingTop: 72, paddingBottom: 48 },
   logoArea: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 48 },
   logo: {

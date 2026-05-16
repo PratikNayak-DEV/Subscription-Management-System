@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { supabase } from '@/services/supabase';
+import { supabase, isDummySupabase } from '@/services/supabase';
 import { Session, User } from '@supabase/supabase-js';
 
 interface AuthState {
@@ -17,10 +17,14 @@ export const useAuthStore = create<AuthState>((set) => ({
   session: null,
   isLoading: true,
   setUser: (user) => set({ user }),
-  setSession: (session) => set({ session }),
+  // When session is set, also sync the user from it
+  setSession: (session) => set({ session, user: session?.user ?? null }),
   setLoading: (isLoading) => set({ isLoading }),
   signOut: async () => {
-    await supabase.auth.signOut();
+    if (!isDummySupabase) {
+      await supabase.auth.signOut();
+    }
+    // Always clear local state regardless of supabase response
     set({ user: null, session: null });
   },
 }));

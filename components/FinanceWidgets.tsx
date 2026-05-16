@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
 import { CATEGORIES } from '@/store/useSubscriptionStore';
 
-export const StatCard = ({ label, value, sub, icon, accentColor = '#6366F1' }) => (
-  <View style={[styles.statCard, { borderColor: accentColor + '35' }]}>
-    <View style={[styles.statIcon, { backgroundColor: accentColor + '18' }]}>
+export const StatCard = ({ label, value, sub, icon, accentColor = '#00E5FF' }) => (
+  <View style={styles.statCard}>
+    <View style={[styles.statIconWrap, { backgroundColor: accentColor + '15' }]}>
       <Ionicons name={icon} size={18} color={accentColor} />
     </View>
     <Text style={styles.statValue}>{value}</Text>
@@ -20,13 +21,13 @@ export const SubCard = ({ item, onPress }) => {
 
   return (
     <TouchableOpacity activeOpacity={0.75} onPress={onPress} style={styles.subCard}>
-      <View style={[styles.subIcon, { backgroundColor: (item.color || '#6366F1') + '22' }]}>
+      <View style={[styles.subIcon, { backgroundColor: (item.color || '#00E5FF') + '15' }]}>
         <Text style={styles.subEmoji}>{item.icon}</Text>
       </View>
       <View style={styles.subInfo}>
         <Text style={styles.subName}>{item.name}</Text>
         <View style={styles.subMeta}>
-          <View style={[styles.tag, { backgroundColor: cat.color + '18' }]}>
+          <View style={[styles.tag, { backgroundColor: cat.color + '15' }]}>
             <Text style={[styles.tagText, { color: cat.color }]}>{cat.label}</Text>
           </View>
           <Text style={styles.subDays}>
@@ -52,6 +53,8 @@ export const CategoryBar = ({ data, total }) => (
             flex: total > 0 ? d.amount / total : 0,
             backgroundColor: d.color,
             height: '100%',
+            borderRadius: 6,
+            marginLeft: i > 0 ? 2 : 0,
           }}
         />
       ))}
@@ -72,67 +75,66 @@ const styles = StyleSheet.create({
   // StatCard
   statCard: {
     flex: 1,
-    backgroundColor: '#18181B',
-    borderRadius: 18,
+    backgroundColor: '#111111',
+    borderRadius: 24,
     padding: 16,
     borderWidth: 1,
-    gap: 3,
+    borderColor: '#2A2A2A',
+    gap: 4,
   },
-  statIcon: {
-    width: 34,
-    height: 34,
-    borderRadius: 10,
+  statIconWrap: {
+    width: 38,
+    height: 38,
+    borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: 6,
+    marginBottom: 8,
   },
-  statValue: { fontSize: 24, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.5 },
-  statLabel: { fontSize: 11, color: '#71717A', fontWeight: '600', letterSpacing: 0.2 },
-  statSub: { fontSize: 10, color: '#52525B', marginTop: 1 },
+  statValue: { fontSize: 26, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.6 },
+  statLabel: { fontSize: 12, color: '#A1A1AA', fontWeight: '600', letterSpacing: 0.3, textTransform: 'uppercase' },
+  statSub: { fontSize: 11, color: '#71717A', marginTop: 1 },
 
   // SubCard
   subCard: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#18181B',
-    borderRadius: 16,
-    padding: 14,
-    marginBottom: 10,
+    backgroundColor: '#111111',
+    borderRadius: 20,
+    padding: 16,
+    marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#27272A',
-    gap: 12,
+    borderColor: '#2A2A2A',
+    gap: 14,
   },
   subIcon: {
-    width: 46,
-    height: 46,
-    borderRadius: 14,
+    width: 48,
+    height: 48,
+    borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  subEmoji: { fontSize: 22 },
-  subInfo: { flex: 1, gap: 5 },
-  subName: { fontSize: 15, fontWeight: '600', color: '#FAFAFA', letterSpacing: -0.2 },
-  subMeta: { flexDirection: 'row', alignItems: 'center', gap: 8 },
-  tag: { paddingHorizontal: 7, paddingVertical: 3, borderRadius: 6 },
-  tagText: { fontSize: 10, fontWeight: '700' },
-  subDays: { fontSize: 11, color: '#71717A', fontWeight: '500' },
+  subEmoji: { fontSize: 24 },
+  subInfo: { flex: 1, gap: 6 },
+  subName: { fontSize: 16, fontWeight: '700', color: '#FAFAFA', letterSpacing: -0.2 },
+  subMeta: { flexDirection: 'row', alignItems: 'center', gap: 10 },
+  tag: { paddingHorizontal: 8, paddingVertical: 4, borderRadius: 8 },
+  tagText: { fontSize: 10, fontWeight: '800', letterSpacing: 0.5, textTransform: 'uppercase' },
+  subDays: { fontSize: 12, color: '#A1A1AA', fontWeight: '500' },
   subRight: { alignItems: 'flex-end' },
-  subPrice: { fontSize: 16, fontWeight: '700', color: '#FAFAFA', letterSpacing: -0.3 },
-  subCycle: { fontSize: 11, color: '#52525B', marginTop: 2 },
+  subPrice: { fontSize: 17, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.4 },
+  subCycle: { fontSize: 12, color: '#71717A', marginTop: 2, fontWeight: '500' },
 
   // CategoryBar
-  catWrap: { gap: 14 },
+  catWrap: { gap: 18 },
   catBar: {
-    height: 6,
-    borderRadius: 6,
+    height: 8,
     flexDirection: 'row',
-    overflow: 'hidden',
-    backgroundColor: '#27272A',
+    backgroundColor: 'transparent',
   },
-  catLegend: { gap: 10 },
-  catRow: { flexDirection: 'row', alignItems: 'center', gap: 10 },
-  catDot: { width: 8, height: 8, borderRadius: 4 },
-  catLabel: { flex: 1, fontSize: 13, color: '#A1A1AA', fontWeight: '500' },
-  catAmount: { fontSize: 13, color: '#FAFAFA', fontWeight: '700' },
-  catAmountSub: { fontSize: 11, color: '#52525B', fontWeight: '400' },
+  catLegend: { gap: 12 },
+  catRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
+  catDot: { width: 10, height: 10, borderRadius: 5 },
+  catLabel: { flex: 1, fontSize: 14, color: '#A1A1AA', fontWeight: '600' },
+  catAmount: { fontSize: 14, color: '#FAFAFA', fontWeight: '800' },
+  catAmountSub: { fontSize: 12, color: '#71717A', fontWeight: '500' },
 });

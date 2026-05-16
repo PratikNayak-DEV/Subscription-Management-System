@@ -25,7 +25,7 @@ function AnimatedSubRow({ item, index, onDelete }) {
   const daysLeft = Math.ceil((new Date(item.nextBill) - new Date()) / (1000 * 60 * 60 * 24));
 
   const confirmDelete = () => {
-    Alert.alert('Remove subscription', `Remove ${item.name}?`, [
+    Alert.alert('Remove subscription', `Remove "${item.name}" from your list?`, [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Remove', style: 'destructive', onPress: () => onDelete(item.id) },
     ]);
@@ -43,7 +43,7 @@ function AnimatedSubRow({ item, index, onDelete }) {
         activeOpacity={1}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
-        onLongPress={confirmDelete}
+        onPress={() => {}}
         style={styles.row}
       >
         <View style={[styles.icon, { backgroundColor: item.color + '20' }]}>
@@ -66,6 +66,9 @@ function AnimatedSubRow({ item, index, onDelete }) {
           <Text style={styles.price}>${item.price.toFixed(2)}</Text>
           <Text style={styles.priceSub}>{item.cycle === 'Monthly' ? '/mo' : '/yr'}</Text>
         </View>
+        <TouchableOpacity onPress={confirmDelete} style={styles.deleteBtn} hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}>
+          <Ionicons name="trash-outline" size={17} color="#FF2A55" />
+        </TouchableOpacity>
       </TouchableOpacity>
     </Animated.View>
   );
@@ -87,7 +90,7 @@ export default function SubscriptionsScreen() {
 
   return (
     <SafeAreaView style={styles.root} edges={['top']}>
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
 
       {/* Header */}
       <View style={styles.header}>
@@ -96,7 +99,7 @@ export default function SubscriptionsScreen() {
           <Text style={styles.subtitle}>${getTotalMonthly().toFixed(2)}/month total</Text>
         </View>
         <TouchableOpacity style={styles.addBtn} onPress={() => router.push('/add-subscription')}>
-          <Ionicons name="add" size={22} color="#FFFFFF" />
+          <Ionicons name="add" size={24} color="#000000" />
         </TouchableOpacity>
       </View>
 
@@ -155,35 +158,38 @@ export default function SubscriptionsScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', paddingHorizontal: 20, paddingTop: 4, paddingBottom: 16 },
   title: { fontSize: 28, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.8 },
   subtitle: { fontSize: 13, color: '#6366F1', fontWeight: '600', marginTop: 2 },
   addBtn: {
-    width: 40, height: 40, borderRadius: 12,
-    backgroundColor: '#6366F1', alignItems: 'center', justifyContent: 'center',
+    width: 44, height: 44, borderRadius: 22,
+    backgroundColor: '#00E5FF', alignItems: 'center', justifyContent: 'center',
   },
 
   searchWrap: {
     flexDirection: 'row', alignItems: 'center', gap: 10,
-    backgroundColor: '#18181B', borderRadius: 12, borderWidth: 1, borderColor: '#27272A',
+    backgroundColor: '#111111', borderRadius: 12, borderWidth: 1, borderColor: '#2A2A2A',
     paddingHorizontal: 14, height: 44, marginHorizontal: 20, marginBottom: 14,
   },
   search: { flex: 1, fontSize: 14, color: '#FAFAFA', fontWeight: '400' },
 
   filterRow: { flexDirection: 'row', alignItems: 'center', gap: 8, paddingHorizontal: 20, marginBottom: 16 },
-  filter: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 8, backgroundColor: '#18181B', borderWidth: 1, borderColor: '#27272A' },
-  filterActive: { backgroundColor: '#1E1B4B', borderColor: '#4F46E5' },
+  filter: { paddingHorizontal: 12, paddingVertical: 6, borderRadius: 8, backgroundColor: '#111111', borderWidth: 1, borderColor: '#2A2A2A' },
+  filterActive: { backgroundColor: 'rgba(0, 229, 255, 0.1)', borderColor: '#00E5FF' },
   filterText: { fontSize: 12, color: '#71717A', fontWeight: '600' },
-  filterTextActive: { color: '#818CF8' },
+  filterTextActive: { color: '#00E5FF' },
   count: { marginLeft: 'auto', fontSize: 12, color: '#52525B', fontWeight: '500' },
 
   list: { paddingHorizontal: 20, paddingBottom: 120 },
 
   row: {
     flexDirection: 'row', alignItems: 'center', gap: 12,
-    backgroundColor: '#18181B', borderRadius: 16, padding: 14, marginBottom: 8,
-    borderWidth: 1, borderColor: '#27272A',
+    backgroundColor: '#111111', borderRadius: 16, padding: 14, marginBottom: 10,
+    borderWidth: 1, borderColor: '#2A2A2A',
+  },
+  deleteBtn: {
+    padding: 6, borderRadius: 10, backgroundColor: 'rgba(255, 42, 85, 0.08)',
   },
   icon: { width: 46, height: 46, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
   emoji: { fontSize: 22 },
@@ -201,7 +207,7 @@ const styles = StyleSheet.create({
   priceSub: { fontSize: 11, color: '#52525B', marginTop: 1 },
 
   empty: { alignItems: 'center', paddingTop: 80, gap: 10 },
-  emptyIcon: { width: 64, height: 64, borderRadius: 20, backgroundColor: '#18181B', alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
+  emptyIcon: { width: 64, height: 64, borderRadius: 20, backgroundColor: '#111111', alignItems: 'center', justifyContent: 'center', marginBottom: 8 },
   emptyTitle: { fontSize: 16, fontWeight: '700', color: '#FAFAFA' },
   emptySub: { fontSize: 13, color: '#52525B' },
 });

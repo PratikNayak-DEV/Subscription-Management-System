@@ -27,8 +27,8 @@ export default function AnalyticsScreen() {
 
   const chartConfig = {
     backgroundColor: 'transparent',
-    backgroundGradientFrom: '#18181B',
-    backgroundGradientTo: '#18181B',
+    backgroundGradientFrom: '#111111',
+    backgroundGradientTo: '#111111',
     decimalPlaces: 0,
     color: (opacity = 1) => `rgba(99, 102, 241, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(113, 113, 122, ${opacity})`,
@@ -45,7 +45,7 @@ export default function AnalyticsScreen() {
 
   return (
     <SafeAreaView style={styles.root} edges={['top']}>
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <Text style={styles.title}>Insights</Text>
         <Text style={styles.sub}>How your money moves every month</Text>
@@ -126,13 +126,13 @@ export default function AnalyticsScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   scroll: { paddingHorizontal: 20, paddingBottom: 120, paddingTop: 4 },
   title: { fontSize: 28, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.8, marginBottom: 4 },
   sub: { fontSize: 13, color: '#71717A', marginBottom: 24 },
 
   summaryRow: { flexDirection: 'row', gap: 8, marginBottom: 32 },
-  summaryCard: { flex: 1, backgroundColor: '#18181B', borderRadius: 16, padding: 14, borderWidth: 1, borderColor: '#27272A', gap: 4 },
+  summaryCard: { flex: 1, backgroundColor: '#111111', borderRadius: 16, padding: 14, borderWidth: 1, borderColor: '#2A2A2A', gap: 4 },
   summaryMid: { borderColor: '#4F46E5', backgroundColor: '#1E1B4B' },
   summaryLabel: { fontSize: 11, color: '#71717A', fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.5 },
   summaryValue: { fontSize: 18, fontWeight: '700', color: '#FAFAFA', letterSpacing: -0.5 },
@@ -140,8 +140,8 @@ const styles = StyleSheet.create({
   section: { marginBottom: 28 },
   sectionTitle: { fontSize: 16, fontWeight: '700', color: '#FAFAFA', letterSpacing: -0.3 },
   sectionSub: { fontSize: 12, color: '#52525B', marginBottom: 14, marginTop: 2 },
-  chartCard: { backgroundColor: '#18181B', borderRadius: 20, padding: 16, borderWidth: 1, borderColor: '#27272A', overflow: 'hidden' },
-  card: { backgroundColor: '#18181B', borderRadius: 20, padding: 18, borderWidth: 1, borderColor: '#27272A', gap: 16 },
+  chartCard: { backgroundColor: '#111111', borderRadius: 20, padding: 16, borderWidth: 1, borderColor: '#2A2A2A', overflow: 'hidden' },
+  card: { backgroundColor: '#111111', borderRadius: 20, padding: 18, borderWidth: 1, borderColor: '#2A2A2A', gap: 16 },
 
   topRow: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   topEmoji: { fontSize: 24, width: 36 },

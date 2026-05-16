@@ -1,7 +1,8 @@
 import { Tabs } from 'expo-router';
-import React, { useRef } from 'react';
-import { View, Text, TouchableOpacity, Animated, StyleSheet, Platform } from 'react-native';
+import React, { useRef, useEffect } from 'react';
+import { View, Text, Animated, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { BlurView } from 'expo-blur';
 
 const TABS = [
   { name: 'index', label: 'Home', icon: 'home', iconOut: 'home-outline' },
@@ -12,21 +13,22 @@ const TABS = [
 
 function TabIcon({ focused, icon, iconOut, label }) {
   const scale = useRef(new Animated.Value(1)).current;
+  const opacity = useRef(new Animated.Value(focused ? 1 : 0)).current;
 
-  const onPress = () => {
-    Animated.sequence([
-      Animated.spring(scale, { toValue: 0.85, useNativeDriver: true, friction: 8 }),
-      Animated.spring(scale, { toValue: 1, useNativeDriver: true, friction: 6 }),
+  useEffect(() => {
+    Animated.parallel([
+      Animated.spring(scale, { toValue: focused ? 1.1 : 1, useNativeDriver: true, friction: 5 }),
+      Animated.timing(opacity, { toValue: focused ? 1 : 0, duration: 200, useNativeDriver: true })
     ]).start();
-  };
+  }, [focused]);
 
   return (
     <Animated.View style={[styles.tabInner, { transform: [{ scale }] }]}>
-      {focused && <View style={styles.blob} />}
+      <Animated.View style={[styles.blob, { opacity }]} />
       <Ionicons
         name={focused ? icon : iconOut}
-        size={21}
-        color={focused ? '#818CF8' : '#52525B'}
+        size={22}
+        color={focused ? '#00E5FF' : '#A1A1AA'}
       />
       <Text style={[styles.tabLabel, focused && styles.tabLabelActive]}>{label}</Text>
     </Animated.View>
@@ -40,6 +42,13 @@ export default function TabLayout() {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: styles.bar,
+        tabBarBackground: () => (
+          <BlurView
+            tint="dark"
+            intensity={60}
+            style={StyleSheet.absoluteFill}
+          />
+        ),
         tabBarIcon: ({ focused }) => {
           const tab = TABS.find((t) => t.name === route.name);
           if (!tab) return null;
@@ -57,38 +66,46 @@ export default function TabLayout() {
 
 const styles = StyleSheet.create({
   bar: {
-    backgroundColor: '#111113',
-    borderTopWidth: 1,
-    borderTopColor: '#27272A',
-    height: Platform.OS === 'ios' ? 82 : 64,
-    paddingBottom: Platform.OS === 'ios' ? 24 : 8,
-    paddingTop: 8,
-    paddingHorizontal: 4,
+    position: 'absolute',
+    bottom: Platform.OS === 'ios' ? 24 : 16,
+    left: 20,
+    right: 20,
     elevation: 0,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    borderRadius: 30,
+    height: 70,
+    paddingBottom: 0,
+    borderTopWidth: 0,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.08)',
+    shadowColor: '#00E5FF',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.1,
+    shadowRadius: 20,
+    overflow: 'hidden',
   },
   tabInner: {
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 3,
-    paddingVertical: 6,
-    paddingHorizontal: 16,
-    borderRadius: 12,
+    gap: 4,
+    height: '100%',
+    width: 60,
     position: 'relative',
-    minWidth: 60,
   },
   blob: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: '#1E1B4B',
-    borderRadius: 12,
+    backgroundColor: 'rgba(0, 229, 255, 0.1)',
+    borderRadius: 20,
+    marginVertical: 8,
   },
   tabLabel: {
     fontSize: 10,
-    color: '#52525B',
-    fontWeight: '600',
-    letterSpacing: 0.1,
+    color: '#A1A1AA',
+    fontWeight: '500',
+    letterSpacing: 0.2,
   },
   tabLabelActive: {
-    color: '#818CF8',
+    color: '#00E5FF',
     fontWeight: '700',
   },
 });

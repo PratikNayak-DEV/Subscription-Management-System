@@ -50,7 +50,7 @@ export default function AddSubscriptionScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.root}
     >
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
       <SafeAreaView style={styles.safe} edges={['top']}>
         {/* Nav */}
         <View style={styles.nav}>
@@ -139,20 +139,20 @@ export default function AddSubscriptionScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   safe: { flex: 1 },
   nav: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 20, paddingVertical: 12 },
-  backBtn: { width: 36, height: 36, borderRadius: 10, backgroundColor: '#18181B', alignItems: 'center', justifyContent: 'center' },
+  backBtn: { width: 36, height: 36, borderRadius: 10, backgroundColor: '#111111', alignItems: 'center', justifyContent: 'center' },
   navTitle: { fontSize: 16, fontWeight: '700', color: '#FAFAFA', letterSpacing: -0.3 },
   scroll: { paddingHorizontal: 20, paddingBottom: 80 },
   label: { fontSize: 11, fontWeight: '700', color: '#71717A', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 10 },
   emojiScroll: { marginBottom: 24 },
-  emojiBtn: { width: 48, height: 48, borderRadius: 13, backgroundColor: '#18181B', alignItems: 'center', justifyContent: 'center', marginRight: 8, borderWidth: 1.5, borderColor: 'transparent' },
+  emojiBtn: { width: 48, height: 48, borderRadius: 13, backgroundColor: '#111111', alignItems: 'center', justifyContent: 'center', marginRight: 8, borderWidth: 1.5, borderColor: 'transparent' },
   emojiBtnActive: { borderColor: '#6366F1', backgroundColor: '#1E1B4B' },
   emoji: { fontSize: 24 },
   dollarSign: { fontSize: 16, color: '#71717A', fontWeight: '600' },
 
-  segRow: { flexDirection: 'row', backgroundColor: '#18181B', borderRadius: 12, padding: 4, gap: 4, borderWidth: 1, borderColor: '#27272A' },
+  segRow: { flexDirection: 'row', backgroundColor: '#111111', borderRadius: 12, padding: 4, gap: 4, borderWidth: 1, borderColor: '#2A2A2A' },
   seg: { flex: 1, paddingVertical: 10, borderRadius: 8, alignItems: 'center' },
   segActive: { backgroundColor: '#6366F1' },
   segText: { fontSize: 13, fontWeight: '600', color: '#52525B' },

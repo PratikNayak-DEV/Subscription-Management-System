@@ -12,22 +12,19 @@ export default function RootLayout() {
   const router = useRouter();
   const segments = useSegments();
 
-  const setSession = useAuthStore((state) => state.setSession);
-  const setUser = useAuthStore((state) => state.setUser);
-  const session = useAuthStore((state) => state.session);
+  const user = useAuthStore((state) => state.user);
   const isLoading = useAuthStore((state) => state.isLoading);
   const setLoading = useAuthStore((state) => state.setLoading);
+  const setSession = useAuthStore((state) => state.setSession);
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
-      setUser(session?.user ?? null);
       setLoading(false);
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session);
-      setUser(session?.user ?? null);
       setLoading(false);
     });
 
@@ -37,16 +34,16 @@ export default function RootLayout() {
   useEffect(() => {
     if (isLoading) return;
     const inAuthGroup = segments[0] === '(auth)';
-    if (!session && !inAuthGroup) {
+    if (!user && !inAuthGroup) {
       router.replace('/(auth)/login');
-    } else if (session && inAuthGroup) {
+    } else if (user && inAuthGroup) {
       router.replace('/(tabs)');
     }
-  }, [session, isLoading, segments]);
+  }, [user, isLoading, segments]);
 
   if (isLoading) {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#09090B' }}>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#000000' }}>
         <ActivityIndicator size="large" color="#6366F1" />
       </View>
     );
@@ -54,7 +51,7 @@ export default function RootLayout() {
 
   return (
     <>
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#09090B' } }}>
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#000000' } }}>
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
         <Stack.Screen
@@ -62,11 +59,11 @@ export default function RootLayout() {
           options={{
             presentation: 'modal',
             headerShown: false,
-            contentStyle: { backgroundColor: '#09090B' },
+            contentStyle: { backgroundColor: '#000000' },
           }}
         />
       </Stack>
-      <StatusBar style="light" backgroundColor="#09090B" />
+      <StatusBar style="light" backgroundColor="#000000" />
     </>
   );
 }

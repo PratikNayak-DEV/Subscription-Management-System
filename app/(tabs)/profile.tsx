@@ -33,7 +33,7 @@ export default function ProfileScreen() {
 
   return (
     <SafeAreaView style={styles.root} edges={['top']}>
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         {/* Profile header */}
         <View style={styles.profileCard}>
@@ -97,7 +97,7 @@ export default function ProfileScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   scroll: { paddingHorizontal: 20, paddingBottom: 120, paddingTop: 4 },
 
   profileCard: { alignItems: 'center', paddingVertical: 32, gap: 8, marginBottom: 8 },
@@ -112,13 +112,13 @@ const styles = StyleSheet.create({
   planText: { fontSize: 12, color: '#F59E0B', fontWeight: '700' },
 
   statsRow: { flexDirection: 'row', gap: 8, marginBottom: 28 },
-  statBox: { flex: 1, backgroundColor: '#18181B', borderRadius: 16, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: '#27272A', gap: 4 },
+  statBox: { flex: 1, backgroundColor: '#111111', borderRadius: 16, padding: 14, alignItems: 'center', borderWidth: 1, borderColor: '#2A2A2A', gap: 4 },
   statBoxMid: { borderColor: '#4F46E5', backgroundColor: '#1E1B4B' },
   statValue: { fontSize: 18, fontWeight: '800', color: '#FAFAFA', letterSpacing: -0.5 },
   statLabel: { fontSize: 10, color: '#71717A', fontWeight: '600', textTransform: 'uppercase', letterSpacing: 0.3 },
 
   groupLabel: { fontSize: 11, fontWeight: '700', color: '#71717A', letterSpacing: 0.8, textTransform: 'uppercase', marginBottom: 8, marginTop: 4 },
-  group: { backgroundColor: '#18181B', borderRadius: 16, marginBottom: 20, borderWidth: 1, borderColor: '#27272A', overflow: 'hidden' },
+  group: { backgroundColor: '#111111', borderRadius: 16, marginBottom: 20, borderWidth: 1, borderColor: '#2A2A2A', overflow: 'hidden' },
   menuItem: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 14, gap: 12 },
   menuIcon: { width: 34, height: 34, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
   menuLabel: { flex: 1, fontSize: 14, fontWeight: '500', color: '#FAFAFA', letterSpacing: -0.1 },

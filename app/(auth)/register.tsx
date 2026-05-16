@@ -47,7 +47,7 @@ export default function RegisterScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={styles.root}
     >
-      <StatusBar barStyle="light-content" backgroundColor="#09090B" />
+      <StatusBar barStyle="light-content" backgroundColor="#000000" />
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <TouchableOpacity onPress={() => router.back()} style={styles.backBtn}>
           <Ionicons name="arrow-back" size={20} color="#A1A1AA" />
@@ -102,7 +102,7 @@ export default function RegisterScreen() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: '#09090B' },
+  root: { flex: 1, backgroundColor: '#000000' },
   scroll: { flexGrow: 1, paddingHorizontal: 24, paddingTop: 64, paddingBottom: 48 },
   backBtn: { flexDirection: 'row', alignItems: 'center', gap: 6, marginBottom: 40 },
   backText: { fontSize: 14, color: '#A1A1AA', fontWeight: '500' },
